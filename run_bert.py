@@ -426,13 +426,13 @@ def main():
     if args.do_test:
         args.model_type = args.model_type.lower()
         r = 0
-        with open (args.output_dir+'/test_results.txt','w') as f:
+        with open (args.output_dir+'/test_results.txt','wa') as f:
             model = model_class.from_pretrained(args.output_dir)
             model.to(args.device)
             sent_model = BertSent_Encode.from_pretrained('SentiX_Base_Model')
             sent_model.to(args.device)
             results = evaluate(args, model,sent_model, tokenizer, 'test')
-            f.write("results "+str(results)+'\n')
+            f.write(f"results (seed: {args.seed}) "+str(results)+'\n')
         del model
         torch.cuda.empty_cache()
 
