@@ -421,7 +421,7 @@ def main():
     if args.do_test:
         args.model_type = args.model_type.lower()
         r = 0
-        with open (args.output_dir+'/test_results.txt','wa') as f:
+        with open (args.output_dir+'/test_results.txt', 'a') as f:
             model = model_class.from_pretrained(args.output_dir)
             model.to(args.device)
             sent_model = BertSent_Encode.from_pretrained('SentiX_Base_Model')
