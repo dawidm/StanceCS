@@ -69,29 +69,29 @@ def set_seed(args):
 
 def init_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--output_dir', type=str, default='model_output')
-    parser.add_argument("--data_dir", default=None, type=str, required=True,
+    parser.add_argument('--output_dir', type=str, default='output')
+    parser.add_argument("--data_dir", default='VAST', type=str,
                         help="The input data dir. Should contain the .tsv files (or other data files) for the task.")
-    parser.add_argument("--task", default='all', type=str, required=True,
+    parser.add_argument("--task", default='zero', type=str,
                         help="Task for stance detection")
-    parser.add_argument("--model_type", default=None, type=str, required=True,
+    parser.add_argument("--model_type", default='bert_stance', type=str,
                         help="Model type selected in the list: " + ", ".join(MODEL_CLASSES.keys()))
     parser.add_argument("--fix_tfm", default=0, type=int, help="whether fix the transformer params or not")
-    parser.add_argument("--model_name_or_path", default=None, type=str, required=True,
+    parser.add_argument("--model_name_or_path", default='bert-base-uncased', type=str,
                         help="Path to pre-trained model or shortcut name selected in the list: " + ", ".join(
                             ALL_MODELS))
     parser.add_argument("--config_name", default="", type=str,
                         help="Pretrained config name or path if not the same as model_name")
     parser.add_argument("--tokenizer_name", default="", type=str,
                         help="Pretrained tokenizer name or path if not the same as model_name")
-    parser.add_argument("--max_seq_length", default=512, type=int,
+    parser.add_argument("--max_seq_length", default=256, type=int,
                         help="The maximum total input sequence length after tokenization. Sequences longer "
                              "than this will be truncated, sequences shorter will be padded.")
-    parser.add_argument("--do_lower_case", action='store_true',
+    parser.add_argument("--do_lower_case", action='store_true', default=True,
                         help="Set this flag if you are using an uncased model.")
-    parser.add_argument("--do_train", action='store_true',
+    parser.add_argument("--do_train", action='store_true', default=True,
                         help="Whether to run training.")
-    parser.add_argument("--do_test", action='store_true',
+    parser.add_argument("--do_test", action='store_true', default=True,
                         help="Whether to run testing.")
     parser.add_argument("--do_dev", action='store_true',
                         help="Whether to run dev.")
@@ -128,12 +128,7 @@ def init_args():
     parser.add_argument("--local_rank", type=int, default=-1,
                         help="Distributed learning")
     parser.add_argument('--fp16', default=False, action="store_true")
-    # args = parser.parse_args()
-    args = parser.parse_args(["--data_dir", "VAST", "--model_type", "bert_stance",              
-                              '--model_name_or_path', 'bert-base-uncased',
-                              "--do_lower_case",'--do_test','--do_train',
-                              "--max_seq_length", '256', "--task", 'zero',
-                              '--output_dir','output'])
+    args = parser.parse_args()
     if args.fp16 and amp is None:
         print("No apex installed, fp16 not used.")
         args.fp16 = False
