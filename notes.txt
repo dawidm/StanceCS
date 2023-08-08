@@ -1,8 +1,8 @@
 python 3.8.10
 
-torch 1.10.1
+torch 1.10.1 zamiast 1.10.0 bo cuda 1.13 na serwerze
 https://pytorch.org/get-started/previous-versions/
 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge
 
-geometric
+geometric pasujący do torch 1.10.1 i cuda 1.13
 https://pytorch-geometric.readthedocs.io/en/2.0.4/notes/installation.html
