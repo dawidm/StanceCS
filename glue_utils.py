@@ -108,8 +108,11 @@ class StanceLoader(DataLoader__):
         for i,d in enumerate(zip(text,summary,label)):
             # t0,l,lab,f = d
             t0,l,lab = d
-            l = ast.literal_eval(l)
-            target = ' '.join(u for u in l)
+            if type(l) is not str:
+                l = ast.literal_eval(l)
+                target = ' '.join(u for u in l)
+            else:
+                target = l
             # input_examples.append(InputExample(t0,target,int(lab),fil = int(f)))
             input_examples.append(InputExample(t0,target,int(lab)))
         return input_examples
