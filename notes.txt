@@ -1,0 +1,3 @@
+graph extraction:
+requirements for geometric: https://github.com/declare-lab/kingdom/tree/master
+conda: cudatoolkit 10.2, python 3.8.10
