@@ -1,3 +1,6 @@
 graph extraction:
 requirements for geometric: https://github.com/declare-lab/kingdom/tree/master
 conda: cudatoolkit 10.2, python 3.8.10
+
+
+SEMEVAL: brakuje cech z grafu do wielu próbek (10% dla dev), bo za krótkie teksty
