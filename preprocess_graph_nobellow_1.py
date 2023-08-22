@@ -70,7 +70,7 @@ def get_seeds(max_words,type = 'all',no_below=2):
 
 if __name__ == '__main__':
     
-    bow_size = 7500
+    bow_size = 10000
     
     print ('Extracting seed concepts from all domains.')
     all_seeds = get_seeds(bow_size,'all',no_below=1)
