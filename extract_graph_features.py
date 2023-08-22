@@ -113,11 +113,11 @@ def generate_graph(triplets, num_rels):
 
     return data
 
-def sentence_features(model, split, all_seeds, concept_graphs, relation_map, unique_nodes_mapping, max_words=5000):
+def sentence_features(model, split, all_seeds, concept_graphs, relation_map, unique_nodes_mapping, max_words=5000, no_below=2):
     """
         Graph features for each sentence (document) instance in a domain.
     """
-    x, dico = get_stance_dataset(exp_type=split, max_words=max_words)
+    x, dico = get_stance_dataset(exp_type=split, max_words=max_words, no_below=no_below)
     d = list(dico.values())
     sent_features = np.zeros((len(x), 100))
     
@@ -178,6 +178,7 @@ if __name__ == '__main__':
     parser.add_argument('--reg', type=float, default=1e-2, help='regularization coefficient')
     parser.add_argument('--grad-norm', type=float, default=1.0, help='grad norm')
     parser.add_argument('--max-words', type=int, default=5000, help='grad norm')
+    parser.add_argument('--no_below', type=int, default=2, help='grad norm')
     args = parser.parse_args()
     print(args)
     torch.cuda.set_device(1)
@@ -208,7 +209,8 @@ if __name__ == '__main__':
     model.eval()
 
     for split in ['dev','train','test']:
-        sf = sentence_features(model, split, all_seeds, concept_graphs, relation_map, unique_nodes_mapping, max_words=args.max_words)
+        sf = sentence_features(model, split, all_seeds, concept_graphs, relation_map,
+                               unique_nodes_mapping, max_words=args.max_words, no_below=args.no_below)
         np.ndarray.dump(sf, open('graph_features/sf_' + split + '_dev_5000.np', 'wb'))
         print('Finished extract '+split+' features')
     print ('Done.')

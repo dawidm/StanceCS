@@ -7,7 +7,7 @@ import ast
 nlp = spacy.load("en_core_web_sm")
 
 
-def parse_processed_stance_dataset(domain, max_words):
+def parse_processed_stance_dataset(domain, max_words, no_below=2):
     datasets = {}
 
     data_dir1 = 'VAST/vast_'+domain+'.csv'
@@ -28,7 +28,7 @@ def parse_processed_stance_dataset(domain, max_words):
         # tokens_list = []
         # tokens_list = tokens.split(' ')
         _ = dico.doc2bow(u, allow_update=True)
-    dico.filter_extremes(no_below=2, keep_n=max_words)
+    dico.filter_extremes(no_below=no_below, keep_n=max_words)
     dico.compactify()
 
     X = []
@@ -72,8 +72,8 @@ def get_dataset_path(domain_name, exp_type):
 
     return os.path.join(prefix, domain_name, fname)
 
-def get_stance_dataset(max_words=5000, exp_type='train'):
-    datasets, dico = parse_processed_stance_dataset(exp_type, max_words)
+def get_stance_dataset(max_words=5000, exp_type='train', no_below=2):
+    datasets, dico = parse_processed_stance_dataset(exp_type, max_words, no_below=no_below)
     print('parsed data ' +str(exp_type))
     L_s = datasets[exp_type]
     X_s = count_list_to_sparse_matrix(L_s,dico)
