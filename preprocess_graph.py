@@ -53,7 +53,7 @@ def get_seeds(max_words,type = 'all'):
     dico = gensim_dico()
     for l in text:
         t = nlp(l)
-        tokens = [str(t[i]).lower() for i in range(len(t)-1)]
+        tokens = [str(t[i]) for i in range(len(t)-1)]
         _ = dico.doc2bow(tokens, allow_update=True)
     # summary = data['text']
     # for l in summary:

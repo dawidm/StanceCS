@@ -19,7 +19,7 @@ def parse_processed_stance_dataset(domain, max_words, no_below=2):
     dico = gensim_dico()
     for l in text:
         t = nlp(l)
-        tokens = [str(t[i]).lower() for i in range(len(t)-1)]
+        tokens = [str(t[i]) for i in range(len(t)-1)]
         _ = dico.doc2bow(tokens, allow_update=True)
     summary = data['topic']
     for l in summary:
@@ -27,7 +27,7 @@ def parse_processed_stance_dataset(domain, max_words, no_below=2):
         # tokens = ' '.join(u fsor u in summary)
         # tokens_list = []
         # tokens_list = tokens.split(' ')
-        _ = dico.doc2bow(u.lower(), allow_update=True)
+        _ = dico.doc2bow(u, allow_update=True)
     dico.filter_extremes(no_below=no_below, keep_n=max_words)
     dico.compactify()
 
@@ -39,7 +39,7 @@ def parse_processed_stance_dataset(domain, max_words, no_below=2):
         target = ' '.join(u for u in us)
         t = t+' '+target
         tokens = nlp(t)
-        tokens_list = [str(tokens[i]).lower() for i in range(len(tokens)-1)]
+        tokens_list = [str(tokens[i]) for i in range(len(tokens)-1)]
         count_list = dico.doc2bow(tokens_list, allow_update=False)
         docid += 1
         X.append((docid, count_list))
