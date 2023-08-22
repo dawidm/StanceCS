@@ -178,7 +178,7 @@ if __name__ == '__main__':
     parser.add_argument('--reg', type=float, default=1e-2, help='regularization coefficient')
     parser.add_argument('--grad-norm', type=float, default=1.0, help='grad norm')
     parser.add_argument('--max-words', type=int, default=5000, help='grad norm')
-    parser.add_argument('--no_below', type=int, default=2, help='grad norm')
+    parser.add_argument('--no-below', type=int, default=2, help='grad norm')
     args = parser.parse_args()
     print(args)
     torch.cuda.set_device(1)
