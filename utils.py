@@ -27,7 +27,7 @@ def parse_processed_stance_dataset(domain, max_words, no_below=2):
         # tokens = ' '.join(u fsor u in summary)
         # tokens_list = []
         # tokens_list = tokens.split(' ')
-        _ = dico.doc2bow([t.lower() for t in u], allow_update=True)
+        _ = dico.doc2bow(u.lower(), allow_update=True)
     dico.filter_extremes(no_below=no_below, keep_n=max_words)
     dico.compactify()
 
