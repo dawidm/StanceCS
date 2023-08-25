@@ -65,7 +65,6 @@ def get_seeds(max_words,type = 'all'):
     #     _ = dico.doc2bow(tokens_list, allow_update=True)
     dico.filter_extremes(no_below=2, keep_n=max_words)
     dico.compactify()
-    print(len(dico))
     seeds = spacy_seed_concepts(dico)
     return seeds
 
