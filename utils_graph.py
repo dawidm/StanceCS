@@ -101,9 +101,9 @@ def domain_aggregated_graph(seeds, G, G_reverse, concept_map, relation_map, dens
     graph = []
     for node in tqdm(seeds):
         if dense:
-            sg = subgraph_dense(node, G, G_reverse, depth)
+            sg = subgraph_dense(node.lower(), G, G_reverse, depth)
         else:
-            sg = subgraph_sparse(node, G, G_reverse)
+            sg = subgraph_sparse(node.lower(), G, G_reverse)
             
         for triplet in sg:
             graph.append([concept_map[triplet[0]], relation_map[triplet[1]], concept_map[triplet[2]]])
