@@ -86,7 +86,7 @@ if __name__ == '__main__':
     concept_graphs = {}
 
     for node in tqdm(all_seeds, desc='Instance', position=0):
-        concept_graphs[node.lower()] = subgraph_for_concept(node, G, G_reverse, concept_map, relation_map)
+        concept_graphs[node.lower()] = subgraph_for_concept(node.lower(), G, G_reverse, concept_map, relation_map)
         
     # Create mappings
     inv_concept_map = {v: k for k, v in concept_map.items()}
