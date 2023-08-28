@@ -139,6 +139,15 @@ def sentence_features(model, split, all_seeds, concept_graphs, relation_map, uni
 
         for item in absent:
             xg = xg[~np.any(xg == item, axis=1)]
+
+        if xg.shape[0] == 0:
+            xg = np.concatenate([concept_graphs[item.lower()] for item in n])
+            xg = xg[~np.all(xg == 0, axis=1)]
+            absent1 = set(xg[:, 0]) - unique_nodes_mapping.keys()
+            absent2 = set(xg[:, 2]) - unique_nodes_mapping.keys()
+            absent = absent1.union(absent2)
+            for item in absent:
+                xg = xg[~np.any(xg == item, axis=1)]
         
         xg[:, 0] = np.vectorize(unique_nodes_mapping.get)(xg[:, 0])
         xg[:, 2] = np.vectorize(unique_nodes_mapping.get)(xg[:, 2])
