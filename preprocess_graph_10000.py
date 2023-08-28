@@ -18,7 +18,7 @@ def spacy_seed_concepts(dico):
     """
     seeds = []
     concepts = list(dico.values())
-    tags = ['PROPN', 'NOUN', 'ADJ', 'ADV']
+    tags = ['PROPN', 'NOUN', 'ADJ', 'ADV', 'VERB']
 
     for item in tqdm(concepts):
         if '_' not in item:

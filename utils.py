@@ -89,7 +89,7 @@ def spacy_seed_concepts(dico):
     """
     seeds = []
     concepts = list(dico.values())
-    tags = ['PROPN', 'NOUN', 'ADJ', 'ADV']
+    tags = ['PROPN', 'NOUN', 'ADJ', 'ADV', 'VERB']
 
     for item in tqdm(concepts):
         if '_' not in item:
@@ -106,7 +106,7 @@ def spacy_seed_concepts_list(concepts):
     Returns concepts which belongs to proper noun, noun, adjective, or adverb parts-of-speech-tag category
     """
     seeds = []
-    tags = ['PROPN', 'NOUN', 'ADJ', 'ADV']
+    tags = ['PROPN', 'NOUN', 'ADJ', 'ADV', 'VERB']
 
     for item in concepts:
         if '_' not in item:
