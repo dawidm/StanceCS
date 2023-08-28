@@ -22,7 +22,7 @@ def spacy_seed_concepts(dico):
 
     for item in tqdm(concepts):
         if '_' not in item:
-            doc = nlp(item)
+            doc = nlp(' ' + item + ' ')
             switch = 0
             for token in doc:
                 if token.pos_ not in tags:
