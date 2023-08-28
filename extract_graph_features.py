@@ -127,6 +127,9 @@ def sentence_features(model, split, all_seeds, concept_graphs, relation_map, uni
         n = list(spacy_seed_concepts_list(c).intersection(set(all_seeds)))
 
         xg = np.concatenate([concept_graphs[item.lower()] for item in n])
+        if xg.shape[0] == 0:
+            print('missing graph embedings for sample use average of all graphs')
+            xg = np.concatenate(concept_graphs.values())
         xg = xg[~np.all(xg == 0, axis=1)]
         
         absent1 = set(xg[:, 0]) - unique_nodes_mapping.keys()
