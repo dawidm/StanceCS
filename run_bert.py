@@ -341,7 +341,7 @@ def compute_metrics_absa(preds, labels):
     micro_r = float(n_tp_total) / (n_g_total + SMALL_POSITIVE_CONST)
     micro_f1 = 2 * micro_p * micro_r / (micro_p + micro_r + SMALL_POSITIVE_CONST)
 
-    fa_f1 = f1_macro_fa_score(labels, preds)
+    fa_f1 = f1_macro_fa_score(labels.detach().cpu(), preds.detach().cpu())
 
     scores = {'oppose-f1': ts_f1[0],'support-f1': ts_f1[1],'neutral-f1': ts_f1[2],
               'macro-f1': macro_f1, "micro-f1": micro_f1, "macro-f1-fa": fa_f1}
