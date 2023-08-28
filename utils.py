@@ -96,14 +96,8 @@ def spacy_seed_concepts(dico):
             doc = nlp(f' {item} ')
             switch = 0
             for token in doc:
-                if token.pos_ not in tags:
-                    switch = 1
-                    break
-                else:
-                    continue
-                
-            if switch == 0:
-                seeds.append(item)
+                if token.pos_ in tags:
+                    seeds.append(item)
                 
     return set(seeds)
 
@@ -117,16 +111,9 @@ def spacy_seed_concepts_list(concepts):
     for item in concepts:
         if '_' not in item:
             doc = nlp(f' {item} ')
-            switch = 0
             for token in doc:
-                if token.pos_ not in tags:
-                    switch = 1
-                    break
-                else:
-                    continue
-                
-            if switch == 0:
-                seeds.append(item)
+                if token.pos_ in tags:
+                    seeds.append(item)
                 
     return set(seeds)
 

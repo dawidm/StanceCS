@@ -23,16 +23,9 @@ def spacy_seed_concepts(dico):
     for item in tqdm(concepts):
         if '_' not in item:
             doc = nlp(f' {item} ')
-            switch = 0
             for token in doc:
-                if token.pos_ not in tags:
-                    switch = 1
-                    break
-                else:
-                    continue
-                
-            if switch == 0:
-                seeds.append(item)
+                if token.pos_ in tags:
+                    seeds.append(item)
                 
     return set(seeds)
 
