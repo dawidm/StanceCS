@@ -27,6 +27,7 @@ import json
 import shutil
 import re
 from glue_utils import *
+from sklearn.metrics import classification_report
 
 logger = logging.getLogger(__name__)
 try:
