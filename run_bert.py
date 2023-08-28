@@ -303,6 +303,14 @@ def load_and_cache_examples(args, tokenizer, mode='train'):
     gc.collect()
     return dataset
 
+
+def f1_macro_fa_score(labels, preds):
+    clf_report = classification_report(labels, preds, output_dict=True, zero_division=0)
+    f1_favor = clf_report['0']['f1-score']
+    f1_against = clf_report['1']['f1-score']
+    return (f1_favor + f1_against) / 2
+
+
 SMALL_POSITIVE_CONST = 1e-4
 def compute_metrics_absa(preds, labels):
     errors = []
@@ -332,7 +340,10 @@ def compute_metrics_absa(preds, labels):
     micro_r = float(n_tp_total) / (n_g_total + SMALL_POSITIVE_CONST)
     micro_f1 = 2 * micro_p * micro_r / (micro_p + micro_r + SMALL_POSITIVE_CONST)
 
-    scores = {'oppose-f1': ts_f1[0],'support-f1': ts_f1[1],'neutral-f1': ts_f1[2],'macro-f1': macro_f1, "micro-f1": micro_f1}
+    fa_f1 = f1_macro_fa_score(labels, preds)
+
+    scores = {'oppose-f1': ts_f1[0],'support-f1': ts_f1[1],'neutral-f1': ts_f1[2],
+              'macro-f1': macro_f1, "micro-f1": micro_f1, "macro-f1-fa": fa_f1}
     print(scores)
     return scores,errors
 
