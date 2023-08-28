@@ -59,6 +59,9 @@ def get_seeds(max_words,type = 'all'):
     dico.filter_extremes(no_below=2, keep_n=max_words)
     dico.compactify()
     seeds = spacy_seed_concepts(dico)
+    if len(seeds) == 0:
+        print('warn: no concepts found')
+        list(dico.values())
     return seeds
 
 if __name__ == '__main__':
