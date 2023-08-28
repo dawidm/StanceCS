@@ -128,7 +128,7 @@ def sentence_features(model, split, all_seeds, concept_graphs, relation_map, uni
 
         if len(n) == 0:
             print('missing graph embedings for sample use average of all graphs')
-            xg = np.concatenate(concept_graphs.values())
+            xg = np.concatenate(list(concept_graphs.values()))
         else:
             xg = np.concatenate([concept_graphs[item.lower()] for item in n])
         xg = xg[~np.all(xg == 0, axis=1)]
