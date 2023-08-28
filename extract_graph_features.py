@@ -142,7 +142,7 @@ def sentence_features(model, split, all_seeds, concept_graphs, relation_map, uni
 
         if xg.shape[0] == 0:
             print('missing graph embedings for sample use average of all graphs')
-            xg = np.concatenate([concept_graphs[item.lower()] for item in n])
+            xg = np.concatenate(list(concept_graphs.values()))
             xg = xg[~np.all(xg == 0, axis=1)]
             absent1 = set(xg[:, 0]) - unique_nodes_mapping.keys()
             absent2 = set(xg[:, 2]) - unique_nodes_mapping.keys()
